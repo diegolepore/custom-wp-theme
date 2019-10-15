@@ -21,6 +21,9 @@ add_action('wp_enqueue_scripts', 'load_js');
 
 //Theme Options
 add_theme_support('menus');
+add_theme_support('post-thumbnails');
+add_theme_support('widgets');
+
 
 //Menus
 register_nav_menus (
@@ -32,3 +35,70 @@ register_nav_menus (
     )
 
 );
+
+//Custom Image Sizes
+add_image_size('blog-large', 800, 400, true);
+add_image_size('blog-small', 300, 200, true);
+
+//Register Sidebars
+function my_sidebars() {
+    register_sidebar(
+        array(
+            'name' => 'Page Sidebar',
+            'id' => 'page-sidebar',
+            'before_title' => '<h4 class="widget-title">',
+            'after_title' => '</h4>',
+
+
+        )
+    );
+
+    register_sidebar(
+        array(
+            'name' => 'Blog Sidebar',
+            'id' => 'blog-sidebar',
+            'before_title' => '<h4 class="widget-title">',
+            'after_title' => '</h4>',
+
+
+        )
+    );
+}
+add_action('widgets_init', 'my_sidebars');
+
+
+//Post Types
+function journals_post_type() {
+
+    $args = array(
+        'labels' => array(
+            'name' => 'Journals',
+            'singular_name' => 'Journal',
+        ),
+        'hierarchical' => false,
+        'public' => true,
+        'has_archive' => true,
+        'menu_icon' => 'dashicons-media-document',
+        'supports' => array('title', 'editor', 'thumbnail'),
+        // 'rewrite' => array('slug' => 'the-journals')
+    );
+
+    register_post_type('journals', $args);
+}
+add_action('init', 'journals_post_type');
+
+
+//Taxonomy
+function my_first_taxonomy() {
+    $args = array(
+        'labels' => array(
+            'name' => 'Fields of Study',
+            'singular_name' => 'Field of Study',
+        ),
+        'public' => true,
+        'hierarchical' => false,
+    );
+
+    register_taxonomy('fields-of-stydy', array('journals'), $args);
+}
+add_action('init', 'my_first_taxonomy');
