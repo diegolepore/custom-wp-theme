@@ -32,6 +32,10 @@
             </a>
 
     <?php endforeach; ?>
+
+
+
+    <?php //comments_template(); ?>
     
     
     

@@ -11,7 +11,6 @@
 
 
     <?php 
-
         // NUMBERS PAGINATION
         /*
         global $wp_query; 
