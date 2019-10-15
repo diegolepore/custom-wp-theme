@@ -68,7 +68,7 @@ add_action('widgets_init', 'my_sidebars');
 
 
 //Post Types
-function journals_post_type() {
+function journals_post_type() { 
 
     $args = array(
         'labels' => array(
@@ -99,6 +99,6 @@ function my_first_taxonomy() {
         'hierarchical' => false,
     );
 
-    register_taxonomy('fields-of-stydy', array('journals'), $args);
+    register_taxonomy('fields-of-study', array('journals'), $args);
 }
 add_action('init', 'my_first_taxonomy');
